@@ -25,7 +25,5 @@ fs.readdirAsync('./sandwhich')
     });
     return arr;
   })
-  .then( parsedFiles => {
-    console.log(parsedFiles);
-  })
+  .then( parsedFiles => console.log(parsedFiles) )
   .catch( err => console.log(err) );
