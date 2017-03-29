@@ -4,7 +4,6 @@ let Promise = require('bluebird');
 Promise.promisifyAll(fs);
 
 let TicTacToeGame = require('./src/tic-tac-toe-game');
-let game = new TicTacToeGame();
 
 function loopFiles(list) {
   let arr = [];
