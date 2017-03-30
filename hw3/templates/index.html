@@ -1,0 +1,19 @@
+{% extends "parentTemplate.html" %}
+
+{% block ticTacToeContent %}
+  <!--code>{{ super() }}</code-->
+
+  <h1>Hello World {{ name }}</h1>
+  We have {{ games | length }} games for you to play!
+
+  <!-- include the partial file -->
+  {% include "macros.html" %}
+  <!-- -->
+  {% import "macros.html" as myMacros %}
+
+  <ul>
+  {% for game in games %}
+    <li><a href="/{{ loop.index0 }}">From inside marcos, {{ myMacros.personalizedMsg(game.humanFirst) }}</a></li>
+  {% endfor %}
+  </ul>
+{% endblock %}

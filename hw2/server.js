@@ -16,6 +16,8 @@ function loopFiles(list) {
   return Promise.all(arr);
 }
 
+//function final() {
+  //return fs.readdirAsync('./sandwhich')
 fs.readdirAsync('./sandwhich')
   .then( listOfFiles => loopFiles(listOfFiles) )
   .then( readFilesArr => {
@@ -27,3 +29,12 @@ fs.readdirAsync('./sandwhich')
   })
   .then( parsedFiles => console.log(parsedFiles) )
   .catch( err => console.log(err) );
+//}
+
+module.exports = function() {
+  return final(); //wait until all promises are done then export
+}
+
+//meanwhile elsewhere
+//let s = require('./server');
+//s().then(...).catch(...);

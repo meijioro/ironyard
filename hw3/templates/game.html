@@ -1,0 +1,66 @@
+{% extends "parentTemplate.html" %}
+
+
+{% block ticTacToeContent %}
+
+
+{% if saved %}
+  <div class="alert alert-success" role="alert">
+    You saved the game.
+  </div>
+{% endif %}
+
+{% if index.winner === 1 %}
+  <div class="jumbotron">
+    <h1>Winner: {{ 'you' if index.humanFirst else 'the computer' }}</h1>
+  </div>
+{% elif index.winner === 2 %}
+  <div class="jumbotron">
+    <h1>Winner: {{ 'you' if not index.humanFirst else 'the computer' }}</h1>
+  </div>
+{% endif %}
+
+
+<table class="table table-bordered">
+  {% for row in range(3) %}
+  <tr>
+
+    {% for col in range(3) %}
+    <td>
+      {% if index.board.whatsInThisSpace(row, col) === 1 %} 
+        X
+      {% elif index.board.whatsInThisSpace(row,col) === 2 %} 
+        0
+      {% else %}
+        <form method="POST" action="/{{ gameIndex }}">
+          <button class="btn">Mark</button>
+          <input type="hidden" name="row" value="{{ row }}">
+          <input type="hidden" name="col" value="{{ col }}">
+        </form>
+      {% endif %}
+    </td>
+    {% endfor %}
+
+  </tr>
+  {% endfor %}
+  </table>
+
+  <form method="POST" action="/{{ gameIndex }}/save">
+    <button class="btn btn-primary">Save Game</button>
+  </form>
+  <hr>
+
+  <form method="POST" action="/{{ gameIndex }}">
+    <button class="btn btn-danger">Delete</button>
+    <input type="hidden" name="X-HTTP-METHOD" value="Delete">
+  </form>
+  <hr>
+
+<div class="well">
+  Qutting?
+  <form method="POST" action="/">
+    <button class="btn btn-danger">Create New Game</button>
+  </form>
+</div>
+
+{% endblock %}
